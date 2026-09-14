@@ -1,0 +1,83 @@
+meta {
+  name: notes_list
+  type: http
+  seq: 1
+  tags: [
+    notes
+  ]
+}
+
+get {
+  url: {{baseUrl}}/api/notes/
+  body: none
+  auth: apikey
+}
+
+params:query {
+  @description('A page number within the paginated result set.')
+  ~page: 
+}
+
+headers {
+  @description('Token-based authentication with required prefix "Token"')
+  Authorization: {{apiKey}}
+}
+
+auth:apikey {
+  key: Authorization
+  value: {{apiKey}}
+  placement: header
+}
+
+settings {
+  forwardAuthorizationHeader: false
+}
+
+example {
+  name: 200 Response
+  
+  request: {
+    url: {{baseUrl}}/api/notes/
+    method: GET
+    mode: none
+    params:query: {
+      ~page: 
+    }
+  
+    headers: {
+      Authorization: {{apiKey}}
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "count": 123,
+          "next": "http://api.example.org/accounts/?page=4",
+          "previous": "http://api.example.org/accounts/?page=2",
+          "results": [
+            {
+              "id": 0,
+              "title": "",
+              "content": "",
+              "created_at": "",
+              "updated_at": "",
+              "category": ""
+            }
+          ]
+        }
+      '''
+    }
+  }
+}

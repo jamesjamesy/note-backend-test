@@ -1,0 +1,66 @@
+meta {
+  name: notes_destroy
+  type: http
+  seq: 6
+  tags: [
+    notes
+  ]
+}
+
+delete {
+  url: {{baseUrl}}/api/notes/:id/
+  body: none
+  auth: apikey
+}
+
+params:path {
+  @description('A unique integer value identifying this note.')
+  id: 
+}
+
+headers {
+  @description('Token-based authentication with required prefix "Token"')
+  Authorization: {{apiKey}}
+}
+
+auth:apikey {
+  key: Authorization
+  value: {{apiKey}}
+  placement: header
+}
+
+settings {
+  forwardAuthorizationHeader: false
+}
+
+example {
+  name: 204 Response
+  description: No response body
+  
+  request: {
+    url: {{baseUrl}}/api/notes/:id/
+    method: DELETE
+    mode: none
+    params:path: {
+      id: 
+    }
+  
+    headers: {
+      Authorization: {{apiKey}}
+    }
+  }
+  
+  response: {
+    status: {
+      code: 204
+      text: No Content
+    }
+  
+    body: {
+      type: text
+      content: '''
+  
+      '''
+    }
+  }
+}

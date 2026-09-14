@@ -1,0 +1,76 @@
+meta {
+  name: login_create
+  type: http
+  seq: 1
+  tags: [
+    login
+  ]
+}
+
+post {
+  url: {{baseUrl}}/api/login/
+  body: formUrlEncoded
+  auth: apikey
+}
+
+headers {
+  @description('Token-based authentication with required prefix "Token"')
+  Authorization: {{apiKey}}
+}
+
+auth:apikey {
+  key: Authorization
+  value: {{apiKey}}
+  placement: header
+}
+
+body:form-urlencoded {
+  username: 
+  password: 
+  token: 
+}
+
+settings {
+  forwardAuthorizationHeader: false
+}
+
+example {
+  name: 200 Response
+  
+  request: {
+    url: {{baseUrl}}/api/login/
+    method: POST
+    mode: formUrlEncoded
+    headers: {
+      Authorization: {{apiKey}}
+    }
+  
+    body:form-urlencoded: {
+      username: 
+      password: 
+      token: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "username": "",
+          "password": "",
+          "token": ""
+        }
+      '''
+    }
+  }
+}

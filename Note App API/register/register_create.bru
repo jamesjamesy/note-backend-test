@@ -1,0 +1,77 @@
+meta {
+  name: register_create
+  type: http
+  seq: 1
+  tags: [
+    register
+  ]
+}
+
+post {
+  url: {{baseUrl}}/api/register/
+  body: json
+  auth: apikey
+}
+
+headers {
+  @description('Token-based authentication with required prefix "Token"')
+  Authorization: {{apiKey}}
+}
+
+auth:apikey {
+  key: Authorization
+  value: {{apiKey}}
+  placement: header
+}
+
+body:json {
+  {
+    "username": "",
+    "password": ""
+  }
+}
+
+settings {
+  forwardAuthorizationHeader: false
+}
+
+example {
+  name: 201 Response
+  
+  request: {
+    url: {{baseUrl}}/api/register/
+    method: POST
+    mode: json
+    headers: {
+      Authorization: {{apiKey}}
+    }
+  
+    body:json: {
+      {
+        "username": "",
+        "password": ""
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "username": "",
+          "password": ""
+        }
+      '''
+    }
+  }
+}

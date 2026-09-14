@@ -1,0 +1,20 @@
+{
+  "version": "1",
+  "name": "Note App API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "openapi": [
+    {
+      "sourceUrl": "http://localhost:8000/api/schema.json",
+      "groupBy": "tags",
+      "autoCheck": true,
+      "autoCheckInterval": 5,
+      "lastSyncDate": "2026-09-14T03:49:31.768Z",
+      "specHash": "e83c3f2fedcb1e24dcfee577c092c4a5"
+    }
+  ],
+  "collectionVersion": "1"
+}

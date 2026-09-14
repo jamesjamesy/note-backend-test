@@ -1,0 +1,76 @@
+meta {
+  name: notes_retrieve
+  type: http
+  seq: 3
+  tags: [
+    notes
+  ]
+}
+
+get {
+  url: {{baseUrl}}/api/notes/:id/
+  body: none
+  auth: apikey
+}
+
+params:path {
+  @description('A unique integer value identifying this note.')
+  id: 
+}
+
+headers {
+  @description('Token-based authentication with required prefix "Token"')
+  Authorization: {{apiKey}}
+}
+
+auth:apikey {
+  key: Authorization
+  value: {{apiKey}}
+  placement: header
+}
+
+settings {
+  forwardAuthorizationHeader: false
+}
+
+example {
+  name: 200 Response
+  
+  request: {
+    url: {{baseUrl}}/api/notes/:id/
+    method: GET
+    mode: none
+    params:path: {
+      id: 
+    }
+  
+    headers: {
+      Authorization: {{apiKey}}
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": 0,
+          "title": "",
+          "content": "",
+          "created_at": "",
+          "updated_at": "",
+          "category": ""
+        }
+      '''
+    }
+  }
+}
