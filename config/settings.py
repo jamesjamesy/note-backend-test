@@ -159,9 +159,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    # 'DEFAULT_RENDERER_CLASSES': [
-    #     'apps.note.renderers.StandardResponseRenderer',
-    # ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'apps.note.renderers.StandardResponseRenderer',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
@@ -171,5 +171,10 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'مستندات و محیط تعاملی تست APIهای پروژه یادداشت',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'POSTPROCESSING_HOOKS': [
+        'drf_spectacular.hooks.postprocess_schema_enums',
+        'apps.note.hooks.envelope_postprocessing_hook',
+    ],
 }
+
 

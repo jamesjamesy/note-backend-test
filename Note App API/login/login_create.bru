@@ -30,7 +30,16 @@ body:form-urlencoded {
   token: 
 }
 
+vars:post-response {
+  apiKey: '''
+    'Token ' + res.body.token
+    
+  '''
+}
+
 settings {
+  encodeUrl: false
+  timeout: 0
   forwardAuthorizationHeader: false
 }
 
