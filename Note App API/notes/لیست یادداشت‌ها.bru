@@ -1,14 +1,14 @@
 meta {
-  name: notes_list
+  name: لیست یادداشت‌ها
   type: http
-  seq: 1
+  seq: 4
   tags: [
     notes
   ]
 }
 
 get {
-  url: {{baseUrl}}/api/notes/
+  url: {{baseUrl}}/api/notes/list
   body: none
   auth: apikey
 }
@@ -33,11 +33,15 @@ settings {
   forwardAuthorizationHeader: false
 }
 
+docs {
+  دریافت لیست یادداشت‌های کاربر یا یادداشت‌های عمومی به صورت صفحه‌بندی‌شده.
+}
+
 example {
   name: 200 Response
   
   request: {
-    url: {{baseUrl}}/api/notes/
+    url: {{baseUrl}}/api/notes/list
     method: GET
     mode: none
     params:query: {
@@ -63,19 +67,25 @@ example {
       type: json
       content: '''
         {
-          "count": 123,
-          "next": "http://api.example.org/accounts/?page=4",
-          "previous": "http://api.example.org/accounts/?page=2",
-          "results": [
-            {
-              "id": 0,
-              "title": "",
-              "content": "",
-              "created_at": "",
-              "updated_at": "",
-              "category": ""
-            }
-          ]
+          "meta": {
+            "message": "Operation successful",
+            "errors": {}
+          },
+          "data": {
+            "count": 123,
+            "next": "http://api.example.org/accounts/?page=4",
+            "previous": "http://api.example.org/accounts/?page=2",
+            "results": [
+              {
+                "id": 0,
+                "title": "",
+                "content": "",
+                "created_at": "",
+                "updated_at": "",
+                "category": ""
+              }
+            ]
+          }
         }
       '''
     }

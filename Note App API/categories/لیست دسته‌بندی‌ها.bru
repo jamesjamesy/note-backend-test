@@ -1,21 +1,16 @@
 meta {
-  name: notes_retrieve
+  name: لیست دسته‌بندی‌ها
   type: http
-  seq: 3
+  seq: 1
   tags: [
-    notes
+    categories
   ]
 }
 
 get {
-  url: {{baseUrl}}/api/notes/:id/
+  url: {{baseUrl}}/api/categories/list
   body: none
   auth: apikey
-}
-
-params:path {
-  @description('A unique integer value identifying this note.')
-  id: 
 }
 
 headers {
@@ -33,17 +28,17 @@ settings {
   forwardAuthorizationHeader: false
 }
 
+docs {
+  دریافت تمامی دسته‌بندی‌های عمومی یادداشت‌ها.
+}
+
 example {
   name: 200 Response
   
   request: {
-    url: {{baseUrl}}/api/notes/:id/
+    url: {{baseUrl}}/api/categories/list
     method: GET
     mode: none
-    params:path: {
-      id: 
-    }
-  
     headers: {
       Authorization: {{apiKey}}
     }
@@ -63,12 +58,16 @@ example {
       type: json
       content: '''
         {
-          "id": 0,
-          "title": "",
-          "content": "",
-          "created_at": "",
-          "updated_at": "",
-          "category": ""
+          "meta": {
+            "message": "Operation successful",
+            "errors": {}
+          },
+          "data": [
+            {
+              "id": 0,
+              "name": ""
+            }
+          ]
         }
       '''
     }

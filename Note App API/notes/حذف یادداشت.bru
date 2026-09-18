@@ -1,20 +1,19 @@
 meta {
-  name: notes_partial_update
+  name: حذف یادداشت
   type: http
-  seq: 5
+  seq: 2
   tags: [
     notes
   ]
 }
 
-patch {
-  url: {{baseUrl}}/api/notes/:id/
-  body: json
+delete {
+  url: {{baseUrl}}/api/notes/delete/:id
+  body: none
   auth: apikey
 }
 
 params:path {
-  @description('A unique integer value identifying this note.')
   id: 
 }
 
@@ -29,25 +28,22 @@ auth:apikey {
   placement: header
 }
 
-body:json {
-  {
-    "title": "",
-    "content": "",
-    "category": 0
-  }
-}
-
 settings {
   forwardAuthorizationHeader: false
 }
 
+docs {
+  حذف یادداشت بر اساس شناسه.
+}
+
 example {
   name: 200 Response
+  description: No response body
   
   request: {
-    url: {{baseUrl}}/api/notes/:id/
-    method: PATCH
-    mode: json
+    url: {{baseUrl}}/api/notes/delete/:id
+    method: DELETE
+    mode: none
     params:path: {
       id: 
     }
@@ -55,34 +51,18 @@ example {
     headers: {
       Authorization: {{apiKey}}
     }
-  
-    body:json: {
-      {
-        "title": "",
-        "content": "",
-        "category": 0
-      }
-    }
   }
   
   response: {
-    headers: {
-      Content-Type: application/json
-    }
-  
     status: {
       code: 200
       text: OK
     }
   
     body: {
-      type: json
+      type: text
       content: '''
-        {
-          "title": "",
-          "content": "",
-          "category": 0
-        }
+  
       '''
     }
   }

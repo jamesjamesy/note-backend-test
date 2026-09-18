@@ -1,21 +1,16 @@
 meta {
-  name: notes_update
+  name: ایجاد یادداشت جدید
   type: http
-  seq: 4
+  seq: 1
   tags: [
     notes
   ]
 }
 
-put {
-  url: {{baseUrl}}/api/notes/:id/
+post {
+  url: {{baseUrl}}/api/notes/create
   body: json
   auth: apikey
-}
-
-params:path {
-  @description('A unique integer value identifying this note.')
-  id: 
 }
 
 headers {
@@ -41,17 +36,17 @@ settings {
   forwardAuthorizationHeader: false
 }
 
+docs {
+  یک یادداشت جدید می‌سازد و در صورت احراز هویت، آن را به کاربر متصل می‌کند.
+}
+
 example {
-  name: 200 Response
+  name: 201 Response
   
   request: {
-    url: {{baseUrl}}/api/notes/:id/
-    method: PUT
+    url: {{baseUrl}}/api/notes/create
+    method: POST
     mode: json
-    params:path: {
-      id: 
-    }
-  
     headers: {
       Authorization: {{apiKey}}
     }
@@ -71,17 +66,26 @@ example {
     }
   
     status: {
-      code: 200
-      text: OK
+      code: 201
+      text: Created
     }
   
     body: {
       type: json
       content: '''
         {
-          "title": "",
-          "content": "",
-          "category": 0
+          "meta": {
+            "message": "Operation successful",
+            "errors": {}
+          },
+          "data": {
+            "id": 0,
+            "title": "",
+            "content": "",
+            "created_at": "",
+            "updated_at": "",
+            "category": ""
+          }
         }
       '''
     }

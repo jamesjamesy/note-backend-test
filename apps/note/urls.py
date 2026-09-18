@@ -1,15 +1,20 @@
-from django.urls import include, path
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 
-from .views import CategoryViewSet, NoteViewSet
+from .views import (
+    CreateNoteView,
+    DeleteNoteView,
+    DetailNoteView,
+    ListNoteView,
+    UpdateNoteView,
+)
 
-
-router = DefaultRouter()
-
-router.register("notes", NoteViewSet, basename="note")
-router.register("categories", CategoryViewSet, basename="category")
+app_name = "note"
 
 urlpatterns = [
-    path("", include(router.urls)),
+    # CRUD Note Endpoints
+    path("create", CreateNoteView.as_view(), name="create-note"),
+    path("list", ListNoteView.as_view(), name="list-note"),
+    path("detail/<int:id>", DetailNoteView.as_view(), name="detail-note"),
+    path("update/<int:id>", UpdateNoteView.as_view(), name="update-note"),
+    path("delete/<int:id>", DeleteNoteView.as_view(), name="delete-note"),
 ]
-

@@ -25,16 +25,13 @@ auth:apikey {
 }
 
 body:form-urlencoded {
-  username: 
-  password: 
+  username: jamesadmin
+  password: o1hE4k9WZ&M9tS&c-?pn
   token: 
 }
 
 vars:post-response {
-  apiKey: '''
-    'Token ' + res.body.token
-    
-  '''
+  apiKey: 'Token ' + res.body.token
 }
 
 settings {
@@ -75,9 +72,15 @@ example {
       type: json
       content: '''
         {
-          "username": "",
-          "password": "",
-          "token": ""
+          "meta": {
+            "message": "Operation successful",
+            "errors": {}
+          },
+          "data": {
+            "username": "",
+            "password": "",
+            "token": ""
+          }
         }
       '''
     }

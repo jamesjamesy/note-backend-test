@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework.authtoken.views import obtain_auth_token
 
-from apps.note.views import RegisterView
+from apps.note.views import ListCategoryView, RegisterView
 from drf_spectacular.renderers import OpenApiJsonRenderer
 from drf_spectacular.views import (
     SpectacularAPIView,
@@ -30,7 +30,8 @@ class SpectacularJSONView(SpectacularAPIView):
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include("apps.note.urls")),
+    path("api/notes/", include("apps.note.urls")),
+    path("api/categories/list", ListCategoryView.as_view(), name="list-category"),
     # آدرس لاگین: نام کاربری و رمز را می‌گیرد و کلید دیجیتال (Token) تحویل می‌دهد
     path("api/login/", obtain_auth_token, name="api_login"),
     # آدرس ثبت‌نام: نام کاربری و رمز جدید را می‌گیرد، کاربر می‌سازد و توکن می‌دهد
@@ -40,5 +41,4 @@ urlpatterns = [
     path("api/schema.json", SpectacularJSONView.as_view(), name="schema-json"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]
-
 
