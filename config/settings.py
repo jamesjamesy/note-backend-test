@@ -160,7 +160,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': [
-        'apps.note.renderers.StandardResponseRenderer',
+        'utils.renderers.StandardResponseRenderer',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
@@ -173,7 +173,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     'POSTPROCESSING_HOOKS': [
         'drf_spectacular.hooks.postprocess_schema_enums',
-        'apps.note.hooks.envelope_postprocessing_hook',
+        'utils.hooks.envelope_postprocessing_hook',
     ],
 }
 
